@@ -1,0 +1,13 @@
+<svg width="36" height="560" viewBox="0 0 36 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+<line x1="17.5" y1="7.5" x2="17.5" y2="525.5" stroke="#333333" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 6"/>
+<circle cx="18" cy="13" r="10" fill="#ED6C6C"/>
+<circle cx="18" cy="13" r="13" fill="#FC6262" fill-opacity="0.4"/>
+<circle cx="18" cy="109" r="10" fill="#ED6C6C"/>
+<circle cx="18" cy="109" r="13" fill="#FC6262" fill-opacity="0.4"/>
+<circle cx="18" cy="250" r="10" fill="#ED6C6C"/>
+<circle cx="18" cy="250" r="13" fill="#FC6262" fill-opacity="0.4"/>
+<circle cx="18" cy="397" r="10" fill="#ED6C6C"/>
+<circle cx="18" cy="397" r="13" fill="#FC6262" fill-opacity="0.4"/>
+<path d="M27 552.29H25.86C24.66 552.29 23.52 552.755 22.68 553.595L20.115 556.13C18.945 557.285 17.04 557.285 15.87 556.13L13.305 553.595C12.465 552.755 11.31 552.29 10.125 552.29H9C6.51 552.29 4.5 550.295 4.5 547.835V531.47C4.5 529.01 6.51 527.015 9 527.015H27C29.49 527.015 31.5 529.01 31.5 531.47V547.835C31.5 550.28 29.49 552.29 27 552.29Z" fill="#FC6262" fill-opacity="0.4" stroke="#ED6C6C" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M18.42 546.44C18.195 546.515 17.82 546.515 17.58 546.44C15.63 545.765 11.25 542.99 11.25 538.265C11.25 536.18 12.93 534.5 15 534.5C16.23 534.5 17.31 535.085 18 536C18.69 535.085 19.77 534.5 21 534.5C23.07 534.5 24.75 536.18 24.75 538.265C24.735 542.99 20.37 545.765 18.42 546.44Z" fill="white" stroke="#ED6C6C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

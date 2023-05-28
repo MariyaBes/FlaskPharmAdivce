@@ -4,248 +4,264 @@
     {% block head %}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="shortcut icon" href="../static/icon/hygieia.png" type="image/png">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">  
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <title>{% block title %} Eltaina — интернет-аптека {% endblock %}</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
+    <link rel="shortcut icon" href="../static/icon/next.svg" type="image/png">
+  
+    <title>{% block title %} PharmAdvice — главная страница {% endblock %}</title>
     {% endblock %}
   </head>
-  <body class="light">
-    <!--Хедер-->
-    <header>
-      <div class="header-top">
-        <div class="container">
+  <body>
 
-          <ul class="header-top-list">
-            <div class="select-mate">
-              <a href="#" class="header-top-gps">
-                <i class="fi fi-rr-marker"></i>
-                  <select name="currency">
-                    <option value="Республика Крым">Республика Крым</option>
-                    <option value="Москва и область">Москва и область</option>
-                    <option value="Краснодар">Краснодар</option>
-                  </select>
-
-              </a>
-            </div>
-
-          <div class="header-alert-news">
-            <p>
-              <b>Служба поддержки</b>
-              8 (800) 800-80-80
-            </p>
-          </div>
-
-        </div>
+    <div class="navbar">
+      <div class="border">
+          <p class="pharmacy">Для фармацевтов</p>
+            <select name="currency" class="gps">
+              <option value="Республика Крым">Республика Крым</option>
+              <option value="Москва и область">Москва и область</option>
+              <option value="Краснодар">Краснодар</option>
+            </select>
       </div>
 
-      <div class="header-main">
-
-        <div class="container">
-
-          <a href="/" class="header-logo">
-            <img src="../static/icon/ELtaina.png" alt="ELtaina's logo">
-          </a>
-
-          <div class="header-search-container">
-            <ion-icon name="search-outline"></ion-icon>
-            <input type="search" name="search" class="search-field" placeholder="Поиск по лекарству или болезни... ">
-
-            <button class="search-btn">
-              <span>Найти</span>
-            </button>
-
-          </div>
-
-          <div class="header-user-actions">
-
-            {% if session.logged_in %}
-
-            <div class="medkit__cart cart">
-              <form action="/medkit" method="post">
-                <button class="action-btn">
-                  <ion-icon name="medkit-outline"></ion-icon>
-                  <!-- <span class="count">4</span> -->
-                </button>
-              </form>
-              
-            </div>
-           
+      <div class="down">
+        <div class="width_con">
+          <div class="items">
+            <img alt="Logo" class="hidden md:block cursor-pointer mr-[422px]" height="100" width="240" src="/static/public/LOGO.png">
             
-            <div class="header__cart cart" tabindex="0">
-              
-              <div class="cart__text">
-                  <button class="action-btn" onclick="printQuantity();">
-                    <ion-icon name="bag-handle-outline"></ion-icon>
-                    
-                  </button>
-                
-                
-                  <div class="cart-content">
-                    <ul class="cart-content__list" data-simplebar>
-                      
-                    </ul>
-                    <form action="/order-form">
-                      <div class="cart-content__bottom">
-                        
-                          <div class="cart-content__fullprice">
-                            
-                          </div>
-                          
-                            <button class="cart-content__btn baton">Оформить</button>
-
-                      </div>
-                    </form>
-                  </div>
-
-              </div>
-
+            <div class="menu_center">
+              <a class="text_1">Мои рецепты</a>
+              <img alt="Palka" class="beetwen" height="15" width="1" src="/static/public/palka.svg">
+              <a class="text_1">Фармацевты</a>
+              <img
+                  alt="Palka"
+                  class="beetwen"
+                  height="15"
+                  width="1"
+                  src="/static/public/palka.svg">
+                  <p class="text_1">О нас</p>
+  
             </div>
-            
-            <script>
-              	function printQuantity () {
-                  let btn_cart = document.querySelector('.action-btn');
-                  let cart = document.querySelector('.header__cart');
-                  let cartQuantity = cart.querySelector('.count');
-                  if (cartQuantity.textContent > 0){
-                    cart.classList.add('active');
-                  }
-                };
-
-                function printQuantity_heart() {
-                  let btn_cart = document.querySelector('.action-btn');
-                  let cart = document.querySelector('.heart__cart');
-                  let cartQuantity = cart.querySelector('.count');
-                  if (cartQuantity.textContent > 0){
-                    cart.classList.add('active');
-                  }
-                };
-            </script>
-
-            <script>
-              function del_item (){
-                let id_item = document.querySelector('.del_id_item').getAttribute('id');
-                $.ajax({
-                  url: '/del_item',
-                  method: 'post',
-                  dataType: 'json',
-                  data: {
-                    id_del: id_item,
-                  },
-                  success: function (response) {
-                    console.log(response);
-                  },
-                  error: function (error) {
-                    console.log(error);
-                  }
-                });
-              };
-            </script>
-
-            <div class="heart__cart cart" >
-              <form action="/favourite-list" method="post">
-                <button class="action-btn" onclick="printQuantity_heart();">
-                  <ion-icon name="heart-outline"></ion-icon>
-                  
-                </button>
-              </form>
-            </div>
-            
-            {% endif %}
-
-            {% if not session.logged_in %}
-              <a href="{{ url_for('login') }}">
-                <button class="action-btn">
-                  <ion-icon name="person-outline"></ion-icon>
-                </button>
-              </a>
-            {% else %}
-            <a href="{{ url_for('logout') }}">
-                <button class="action-btn">
-                  <ion-icon name="log-out-outline"></ion-icon>
-                </button>
-            </a>
-            {% endif %}
-            
-          </div>
-        </div>
-      </div>
-
-    </header>
-
-
-    <!--БАНЕР-->
-    <main>
-
-      <div class="banner">
-
-        <div class="container">
-  
-          <div class="slider-container has-scrollbar">
-  
-            <div class="slider-item">
-  
-              <img src="../static/public/Cart-1.png" alt="women's latest fashion sale" class="banner-img">
-  
-              <div class="banner-content">
-                <p class="banner-subtitle">Предотвратить распространение COVID-19</p>
-
-                <h2 class="banner-title">Онлайн запись на вакцинацию</h2>
-
-                <p class="banner-text">Медцентр "Восток"</p>
-
-              </div>
-            </div>
-
-            <div class="slider-item">
-
-              <img src="../static/public/Cart-2.png" alt="modern sunglasses" class="banner-img">
-  
-              <div class="banner-content">
-                <p class="banner-subtitle">Симферополь</p>
-
-                <h2 class="banner-title">Вакцинация от COVID-19</h2>
-
-                <p class="banner-text">Пожалуйста, носите маску и соблюдайте социальную дистанцию</p>
-
-                
-              </div>
-            </div>
-
-            <div class="slider-item">
-
-              <img src="../static/public/Cart-3.png" alt="modern sunglasses" class="banner-img">
-  
-              <div class="banner-content">
-                  <p class="banner-subtitle">Здоровое питание</p>
-  
-                  <h2 class="banner-title">Как правильно питаться всей семьей?</h2>
-  
-                  <p class="banner-text">Расписанные рецепты на каждый день</p>
-  
+            <img alt="Notification" class="Notification" height="30" width="30" src="/static/public/notification.svg">
+            <div class="block_User">
+                <div class="image">
+                  <img alt="User" class="User" height="30" width="30" src="/static/public/placeholder.jpg">
                   
                 </div>
-              </div>
-
+            </div>
+            
+                      
           </div>
+        </div>
+        
+      </div>
+    </div>
 
+
+    <div class='flex flex-col max-w-[1920px] mx-auto xl:px-[365px] md:px-10 sm:px-2 px-4 min-h-full'>
+      
+      <!-- {/* ОПИСАНИЕ И СЛОГАН */} -->
+
+      <div class="flex flex-row items-center justify-between gap-3 md:gap-0 mt-[88px]">
+        <img src="/static/public/DrawKit.png" alt="five" height="650" width="650">
+
+        <div class='grid ml-[19px]'>
+          <p class='text-[64px] font-bold tracking-wider font-["Prompt"]'>PHARMADVICE</p>
+          
+          <h1 class='font-semibold text-[22px] antialiased tracking-[0.11rem] font-["Lato"]'>Упрощаем взаимодействие с аптекой</h1>
+
+          <h1 class='font-semibold text-base mt-7 tracking-[0.075rem] font-["Lato"]'>Сервис для <a class='text-pink-dark'>онлайн-консультаций</a> с фармацевтом и хранения <a class='text-pink-dark'>электронных рецептов</a>.</h1>
+
+          <h2 class='text-sm font-medium mt-[34px] tracking-[0.02em] font-["Lato"]'>Проводите конференции и онлайн-чаты по любым вопросам с лучшим фармацевтом вашего города! Сохраняйте выписанные электронные рецепты, сравнивайте цены и смотрите их наличие в ближайших аптеках.</h2>
+
+          <button class='font-bold text-base mt-6 bg-pink-dark rounded-[10px] text-white p-3 m-auto tracking-wider hover:bg-pink-darkLight transition duration-300 font-["Lato"]' >Узнать больше!</button>
         </div>
       </div>
 
-    <!-- <script type="module" src="../static/script.js"></script> -->
+      <!-- {/* КАКОЕ РЕШЕНИЕ МЫ ПРЕДЛАГАЕМ */} -->
 
-    <script src="../static/js/script.js"></script>
-    <script src="../static/js/simplebar.js"></script> 
-    <script src="../static/js/basket.js"></script>
+      <div class='flex flex-col'>
+        <p class='font-bold text-[32px] text-gray-dark tracking-widest antialiased mt-10 z-30 font-["Lato"]'>Какое решение мы предлагаем</p>
 
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    
+          <div class='flex flex-row'>
+            <div class='bg-blue-light opacity-50 h-[350px] w-[320px] mt-12 z-40 rounded-[30px] p-4 mr-[115px]'>
+                <p class='text-white mr-3.5 ml-3.5 text-center mt-12 pb-7 font-["Lato"]'>Для людей всех возрастов наш сервис предоставляет возможность хранения электронных рецептов в личном кабинете и поиск лекарств в ближайших аптеках вашего города по доступным ценам.</p>
+                <img src="/static/public/arrowcircler.svg" alt="стрелка" class='m-auto '/>
+            </div>
+
+            <div class='bg-[#0C4DCB] opacity-50 h-[350px] w-[320px] mt-12 z-50 rounded-[30px] p-4 mr-[115px] font-["Lato"]'>
+                <p class='text-white mr-3.5 ml-3.5 text-center mt-12 pb-7'>В случае покупки лекарств для близких или пожилых людей, которые не могут самостоятельно посетить аптеку, пользователи также смогут получить помощь в выборе и поиске необходимых лекарств. </p>
+                <img src="/static/public/arrowcircler.svg" alt="стрелка" class='m-auto '/>
+            </div>
+
+            <div class='bg-[#F06D57] opacity-50 h-[350px] w-[320px] mt-12 z-60 rounded-[30px] p-4'>
+                <p class='text-white mr-3.5 ml-3.5 text-center mt-12 pb-7 font-["Lato"]'>В соответствии с выписанными лекарствами в рецепте, на картах будут указаны точки сеть аптек и отображать наименование препарата, цену и производителя.</p>
+                <img src="/static/public/arrowcircleright2.svg" alt="стрелка" class='m-auto pt-5'/>
+            </div>
+          </div>
+      </div>
+
+      <!-- {/* КАК ЭТО РАБОТАЕТ */} -->
+
+      <div class='flex flex-col'>
+        <p class='font-bold text-[32px] tracking-widest antialiased mt-[48px] text-gray-dark font-["Lato"]'>Как это работает?</p>
+
+        <div class='flex flex-row'>
+
+          <div class='flex flex-col'>
+
+            <div class='flex mt-[114px] flex-col items-end w-[210px] h-[134px] mb-[48px]'>
+                <span class='font-light text-3xl text-gray-dark tracking-wide'>02</span>
+                <span class='text-[20px] font-semibold text-pink tracking-wide font-["Lato"]'>Загрузить рецепт</span>
+                <p class='text-[13px] text-[#555555] tracking-wide text-right font-["Lato"]'>Загружайте и управляйте электронными рецептами через личный профиль.</p>
+            </div>
+
+            <div class='flex mt-[106px] flex-col items-end w-[210px] h-[134px]'>
+              <span class='font-light text-3xl text-gray-dark tracking-wide'>04</span>
+              <span class='text-[20px] font-semibold text-pink tracking-wide font-["Lato"]'>Конференция</span>
+              <p class='text-[13px] text-[#555555] tracking-wide text-right font-["Lato"]'>Начните видео- или чат-консультацию с фармацевтом, чтобы обсудить вопросы или проблемы, связанные с лекарствами.</p>
+            </div>
+
+          </div>
+
+            <img
+              alt="road"
+              class="hidden md:block mt-4 ml-4 mr-4"
+              height="560"
+              width="36"
+              src="/static/public/road.svg"
+            />
+
+            <div class='flex flex-col'>
+
+              <div class='flex mt-4 flex-col w-[290px] h-[118px] mb-[116px]'>
+                <span class='font-light text-3xl text-gray-dark tracking-wide'>01</span>
+                <span class='text-[20px] font-semibold text-pink tracking-wide font-["Lato"]'>Регистрация\авторизация</span>
+                <p class='text-[13px] text-[#555555] tracking-wide font-["Lato"]'>Войдите в систему, чтобы получить доступ к личному профилю пользователя.</p>
+              </div>
+              
+              <div class='flex mt-1 flex-col w-[288px] h-[139px]'>
+                <span class='font-light text-3xl text-gray-dark tracking-wide'>03</span>
+                <span class='text-[20px] font-semibold text-pink tracking-wide font-["Lato"]'>Поиск по карте</span>
+                <p class='text-[13px] text-[#555555] tracking-wide font-["Lato"]'>Найдите ближайшие к Вам аптеки, в которых есть прописанные лекарства.</p>
+              </div>
+              
+            </div>
+            
+            <img
+              alt="cool"
+              class="hidden md:block"
+              height="589"
+              width="589"
+              src="/static/public/DrawKit_2.svg"
+            />
+
+          </div>
+
+      </div>
+
+      <!-- {/* НАША КОМАНДА */} -->
+
+      <div class='flex flex-col'>
+
+        <span class='m-auto font-bold text-[32px] tracking-widest text-gray-dark antialiased font-["Lato"]'>Наша команда</span>
+
+        <div class='flex flex-row m-auto'>
+
+          <div class='flex flex-col mt-[38px] mr-[58px]'>
+            <img
+              alt='mentor'
+              class='flex m-auto'
+              height='120'
+              width='120'
+              src='/static/public/Mentor.svg'
+            />
+            <p class='text-lg font-semibold tracking-widest text-gray-dark m-auto font-["Lato"]'>Сизоненко Анастасия</p>
+            <p class='text-base font-medium tracking-wide text-[#646464] m-auto font-["Lato"]'>Ментор</p>
+          </div>
+
+          <div class='flex flex-col mt-[38px]'>
+            <img
+              alt='teamlid'
+              class='flex m-auto'
+              height='120'
+              width='120'
+              src='/static/public/Teamlid.svg'
+            />
+            <p class='text-lg font-semibold tracking-widest text-gray-dark m-auto font-["Lato"]'>Бессарабенко Мария</p>
+            <p class='text-base font-medium tracking-wide text-[#646464] m-auto font-["Lato"]'>Тимлид, fullstack-разработчик</p>
+          </div>
+
+        </div>
+
+        <div class='flex flex-row m-auto mb-[69px]'>
+
+          <div class='flex flex-col mt-[38px] mr-[58px]'>
+              <img
+                alt='anal'
+                class='flex m-auto'
+                height='120'
+                width='120'
+                src='/static/public/Anal.svg'
+              />
+              <p class='text-lg font-semibold tracking-widest text-gray-dark m-auto font-["Lato"]'>Умерова Аминна</p>
+              <p class='text-base font-medium tracking-wide text-[#646464] m-auto font-["Lato"]'>Аналитик, дизайнер</p>
+            </div>
+
+            <div class='flex flex-col mt-[38px] mr-[58px]'>
+              <img
+                alt='ui-ux'
+                class='flex m-auto'
+                height='120'
+                width='120'
+                src='/static/public/UIux.svg'
+              />
+              <p class='text-lg font-semibold tracking-widest text-gray-dark m-auto font-["Lato"]'>Новинкина Анастасия</p>
+              <p class='text-base font-medium tracking-wide text-[#646464] m-auto font-["Lato"]'>Frontend разработчик, UI/UX</p>
+            </div>
+
+            <div class='flex flex-col mt-[38px]'>
+              <img
+                alt='verst'
+                class='flex m-auto'
+                height='120'
+                width='120'
+                src='/static/public/Verst.svg'
+              />
+              <p class='text-lg font-semibold tracking-widest text-gray-dark m-auto font-["Lato"]'>Азаматова Диана</p>
+              <p class='text-base font-medium tracking-wide text-[#646464] m-auto font-["Lato"]'>Верстальщик, аналитик</p>
+            </div>
+
+          </div>
+        
+      </div>
+
+    </div>
+
+    <footer>
+      <div class="footer">
+        <div class="foot_bor">
+            <img
+                alt='logo'
+                class='logo' 
+                height='38'
+                width='240'
+                src='/static/public/LOGO.png'>
+        </div>
+
+        <div class="foot_down">
+            <span class="decs">О НАС</span>
+            <span class="decs">МОИ РЕЦЕПТЫ</span>
+            <span class="decs">КОНТАКТЫ</span>
+            <span class="decs">FAQ</span>
+        </div>
+
+        <div class="podval">
+            <p class="mb-[11px]">ГБОУВО РК КИПУ имени Февзи Якубова</p>
+
+            <p class="mb-[28px]">ИНИЦИАТИВНАЯ РАЗРАБОТКА В РАМКАХ ИНТЕНСИВА «ОТ ИДЕИ К ПРОТОТИПУ - ВЕСНА 2023»</p>
+        </div>
+
+      </div>
+    </footer>
+
   </body>
 </html>
