@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/login-style.css">
+    <link rel="shortcut icon" href="../static/icon/hygieia.png" type="image/png">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    crossorigin="anonymous"/>
+    <title>{% block title %}Авторизация{% endblock %}</title>
+</head>
+<body>
+
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category, message in messages %} {% if category ==
+        'error' %}
+        <div class="alert alert-danger alter-dismissable fade show" role="alert">
+          {{ message }}
+        </div>
+        {% else %}
+        <div class="alert alert-success alter-dismissable fade show" role="alert">
+          {{ message }}
+        </div>
+        {% endif %} {% endfor %} {% endif %} {% endwith %}
+
+    <div class="container">
+        <div class="forms">
+            <div class="form login">
+                <span class="title">Авторизация</span>
+                <form  id="form"  method="POST">
+                    <div class="input-field">
+                        <input type="email" id="email" name="email" placeholder="Введите email" required>
+                        <i class="uil uil-at"></i>
+
+                    </div>
+                    <div class="input-field">
+                        <input type="password" id="password" name="password" class="password" placeholder="Введите пароль" required>
+                        <i class="uil uil-lock"></i>
+                        <i class="uil uil-eye-slash showHidePw"></i>
+
+                    </div>
+
+                    <div class="checkbox-text">
+
+                        <a href="#" class="text">Забыли пароль?</a>
+                    </div>
+
+                    <button type="submit" class="input-field button">Войти</button>
+                </form>
+
+                <div class="login-signup">
+                    <span class="text">Нет аккаунта?
+                        <a href="/sign-up" class="text signup-link" id="sing-up">Зарегистрируйтесь сейчас</a>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"
+  ></script>
+
+    <script src="../static/js/login.js"></script>
+</body>
+</html>

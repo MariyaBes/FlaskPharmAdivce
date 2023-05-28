@@ -1,0 +1,241 @@
+
+.ftco-section {
+    padding: 4em 0;
+}
+
+.container {
+    max-width: 1140px;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.justify-content-center {
+    -webkit-box-pack: center!important;
+    justify-content: center!important;
+}
+
+.row {
+    display: flex;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.text-center {  text-align: center!important;    }
+
+.mb-5, .my-5 {  margin-bottom: 3rem!important;  }
+
+.col-md-6 {
+    -webkit-box-flex: 0;
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.heading-section {
+    font-size: 28px;
+    color: black;
+}
+
+h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
+    line-height: 1.5;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.col-md-12 {
+    -webkit-box-flex: 0;
+    flex: 0 0 100%;
+    max-width: 100%;
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.table-wrap {   overflow-x: scroll; }
+
+.table {
+    min-width: 1000px!important;
+    width: 100%;
+    box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+    margin-bottom: 1rem;
+    color: #212529;
+    border-collapse: collapse;
+}
+
+table {
+    display: table;
+    border-spacing: 2px;
+    border-color: gray;
+}
+
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.table thead tr {
+    background: #fff;
+    border-bottom: 4px solid #eceffa;
+}
+
+tr {
+    display: tale-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+.table thead tr th {
+    border: none;
+    padding: 30px;
+    font-size: 13px;
+    font-weight: 500;
+    color: gray;
+    vertical-align: bottom;
+}
+
+th {    text-align: inherit;   display: table-cell; }
+
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.table tbody tr {
+    margin-bottom: 10px;
+    border-bottom: 4px solid #f8f9fd;
+}
+
+.alert {
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+
+td {    display: table-cell;    }
+
+.table tbody th, .table tbody td {
+    border: none;
+    padding: 30px;
+    font-size: 14px;
+    background: #fff;
+    vertical-align: middle;
+}
+
+button, input {
+    overflow: visible;
+}
+
+.align-items-center {
+    -webkit-box-align: center !important;
+    align-items: center !important;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.table tbody td .img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.img {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.pl-3, .px-3 {
+    padding-left: 1rem !important;
+}
+
+.table tbody td .email span {   display: block; }
+
+.table tbody td.status .active {
+    background: #cff6dd;
+    color: #1fa750;
+}
+
+.table tbody td.status span {
+    position: relative;
+    border-radius: 30px;
+    padding: 4px 10px 4px 25px;
+}
+
+.table tbody td.status .active:after {  background: #23bd5a;    }
+
+.table tbody td.status span:after {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    width: 10px;
+    height: 10px;
+    content: '';
+    border-radius: 50%;
+}
+
+button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disabled), [type="submit"]:not(:disabled) {
+    cursor: pointer;
+}
+
+button.close {
+    padding: 10px;
+    background-color: hsl(258, 100%, 68%, 100%);
+    border: 0;
+    appearance: none;
+    border-radius: 20px;
+}
+
+button.close-x {
+    padding: 0;
+    border: 0;
+    appearance: none;
+}
+
+button.close:hover {  background-color: rgb(169, 132, 253); transition: all .3s ease-in-out; }
+
+.close {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1;
+    color: #fff;
+    /* text-shadow: 0 1px 0 #fff; */
+    opacity: .8;
+}
+
+.close-x {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+}
+
+button, select {    text-transform: none;   }
+
+.table tbody td.status .waiting {
+    background: #fdf5dd;
+    color: #cfa00c;
+}
+
+.table tbody td.status .waiting:after { background: #f2be1d;    }
+
+.table tbody td.status .not {
+    background: #fdcdcd;
+    color: #fc7a7a;
+}
+
+.table tbody td.status .not:after { background: #E26868;    }
+
+.table tbody td .close-x span {
+    font-size: 15px;
+    color: #dc3545;
+}

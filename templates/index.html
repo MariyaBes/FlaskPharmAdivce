@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="shortcut icon" href="../static/icon/hygieia.png" type="image/png">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <title>{% block title %} Eltaina — интернет-аптека {% endblock %}</title>
+    {% endblock %}
+  </head>
+  <body class="light">
+    <!--Хедер-->
+    <header>
+      <div class="header-top">
+        <div class="container">
+
+          <ul class="header-top-list">
+            <div class="select-mate">
+              <a href="#" class="header-top-gps">
+                <i class="fi fi-rr-marker"></i>
+                  <select name="currency">
+                    <option value="Республика Крым">Республика Крым</option>
+                    <option value="Москва и область">Москва и область</option>
+                    <option value="Краснодар">Краснодар</option>
+                  </select>
+
+              </a>
+            </div>
+
+          <div class="header-alert-news">
+            <p>
+              <b>Служба поддержки</b>
+              8 (800) 800-80-80
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="header-main">
+
+        <div class="container">
+
+          <a href="/" class="header-logo">
+            <img src="../static/icon/ELtaina.png" alt="ELtaina's logo">
+          </a>
+
+          <div class="header-search-container">
+            <ion-icon name="search-outline"></ion-icon>
+            <input type="search" name="search" class="search-field" placeholder="Поиск по лекарству или болезни... ">
+
+            <button class="search-btn">
+              <span>Найти</span>
+            </button>
+
+          </div>
+
+          <div class="header-user-actions">
+
+            {% if session.logged_in %}
+
+            <div class="medkit__cart cart">
+              <form action="/medkit" method="post">
+                <button class="action-btn">
+                  <ion-icon name="medkit-outline"></ion-icon>
+                  <!-- <span class="count">4</span> -->
+                </button>
+              </form>
+              
+            </div>
+           
+            
+            <div class="header__cart cart" tabindex="0">
+              
+              <div class="cart__text">
+                  <button class="action-btn" onclick="printQuantity();">
+                    <ion-icon name="bag-handle-outline"></ion-icon>
+                    
+                  </button>
+                
+                
+                  <div class="cart-content">
+                    <ul class="cart-content__list" data-simplebar>
+                      
+                    </ul>
+                    <form action="/order-form">
+                      <div class="cart-content__bottom">
+                        
+                          <div class="cart-content__fullprice">
+                            
+                          </div>
+                          
+                            <button class="cart-content__btn baton">Оформить</button>
+
+                      </div>
+                    </form>
+                  </div>
+
+              </div>
+
+            </div>
+            
+            <script>
+              	function printQuantity () {
+                  let btn_cart = document.querySelector('.action-btn');
+                  let cart = document.querySelector('.header__cart');
+                  let cartQuantity = cart.querySelector('.count');
+                  if (cartQuantity.textContent > 0){
+                    cart.classList.add('active');
+                  }
+                };
+
+                function printQuantity_heart() {
+                  let btn_cart = document.querySelector('.action-btn');
+                  let cart = document.querySelector('.heart__cart');
+                  let cartQuantity = cart.querySelector('.count');
+                  if (cartQuantity.textContent > 0){
+                    cart.classList.add('active');
+                  }
+                };
+            </script>
+
+            <script>
+              function del_item (){
+                let id_item = document.querySelector('.del_id_item').getAttribute('id');
+                $.ajax({
+                  url: '/del_item',
+                  method: 'post',
+                  dataType: 'json',
+                  data: {
+                    id_del: id_item,
+                  },
+                  success: function (response) {
+                    console.log(response);
+                  },
+                  error: function (error) {
+                    console.log(error);
+                  }
+                });
+              };
+            </script>
+
+            <div class="heart__cart cart" >
+              <form action="/favourite-list" method="post">
+                <button class="action-btn" onclick="printQuantity_heart();">
+                  <ion-icon name="heart-outline"></ion-icon>
+                  
+                </button>
+              </form>
+            </div>
+            
+            {% endif %}
+
+            {% if not session.logged_in %}
+              <a href="{{ url_for('login') }}">
+                <button class="action-btn">
+                  <ion-icon name="person-outline"></ion-icon>
+                </button>
+              </a>
+            {% else %}
+            <a href="{{ url_for('logout') }}">
+                <button class="action-btn">
+                  <ion-icon name="log-out-outline"></ion-icon>
+                </button>
+            </a>
+            {% endif %}
+            
+          </div>
+        </div>
+      </div>
+
+    </header>
+
+
+    <!--БАНЕР-->
+    <main>
+
+      <div class="banner">
+
+        <div class="container">
+  
+          <div class="slider-container has-scrollbar">
+  
+            <div class="slider-item">
+  
+              <img src="../static/public/Cart-1.png" alt="women's latest fashion sale" class="banner-img">
+  
+              <div class="banner-content">
+                <p class="banner-subtitle">Предотвратить распространение COVID-19</p>
+
+                <h2 class="banner-title">Онлайн запись на вакцинацию</h2>
+
+                <p class="banner-text">Медцентр "Восток"</p>
+
+              </div>
+            </div>
+
+            <div class="slider-item">
+
+              <img src="../static/public/Cart-2.png" alt="modern sunglasses" class="banner-img">
+  
+              <div class="banner-content">
+                <p class="banner-subtitle">Симферополь</p>
+
+                <h2 class="banner-title">Вакцинация от COVID-19</h2>
+
+                <p class="banner-text">Пожалуйста, носите маску и соблюдайте социальную дистанцию</p>
+
+                
+              </div>
+            </div>
+
+            <div class="slider-item">
+
+              <img src="../static/public/Cart-3.png" alt="modern sunglasses" class="banner-img">
+  
+              <div class="banner-content">
+                  <p class="banner-subtitle">Здоровое питание</p>
+  
+                  <h2 class="banner-title">Как правильно питаться всей семьей?</h2>
+  
+                  <p class="banner-text">Расписанные рецепты на каждый день</p>
+  
+                  
+                </div>
+              </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    <!-- <script type="module" src="../static/script.js"></script> -->
+
+    <script src="../static/js/script.js"></script>
+    <script src="../static/js/simplebar.js"></script> 
+    <script src="../static/js/basket.js"></script>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
+  </body>
+</html>
