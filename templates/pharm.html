@@ -30,6 +30,7 @@
                 <img alt="Logo" class="hidden md:block cursor-pointer mr-[422px]" height="100" width="240" src="/static/public/LOGO.png">
               </a>
               
+              {% if session.logged_in %}
               <div class="menu_center">
                 <a class="text_1">Мои рецепты</a>
                 <img alt="Palka" class="beetwen" height="15" width="1" src="/static/public/palka.svg">
@@ -45,7 +46,11 @@
                     </a>
                     
               </div>
-              <img alt="Notification" class="Notification" height="30" width="30" src="/static/public/notification.svg">
+              
+              <a href="/logout" class="Notification">
+                <img alt="Notification" class="Notification" height="30" width="30" src="/static/public/logincurve.svg">
+              </a>
+              {% endif %}
               <div class="block_User">
                   <div class="image">
                     {% if not session.logged_in %}
@@ -76,7 +81,7 @@
 
             <div class="row">
               
-              <form action="/search" method="post">
+              <form action="/search" method="post" class="form">
                 <input type="text" name="search_query" placeholder="Поиск фармацевта" class="search_input">
                 <button class="search_but" type="submit">Поиск</button>
               </form>
@@ -87,7 +92,7 @@
       
 
         {% for pharmacist in list %}
-        <div class="container">
+        <div class="container" data-id="{{pharmacist.phamacist_id}}" value="{{pharmacist.phamacist_id}}" alt="{{pharmacist.phamacist_id}}" >
           <img src="{{ pharmacist.image }}" alt="lp" class="Image_Pharm">
 
           
@@ -106,13 +111,13 @@
 
               <button class="butt_chat">Начать чат</button>
               
-              <p class="more">Узнать больше</p> 
+              <a href="/portfolio/{{pharmacist.pharmacist_id}}">
+                <p class="more">Узнать больше</p> 
+              </a>
+              
+              
               <img src="/static/public/arrow-right-circle.svg" alt="fk">
             </div>
-
-            <!-- https://ibb.co/PmWHX9z
-            https://ibb.co/SVsj8fS
-            https://ibb.co/LJsynCn -->
            
           </div>
         </div>

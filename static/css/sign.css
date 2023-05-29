@@ -13,14 +13,19 @@ body{
     height: 100vh;
     display: flex;
     background-color: white;
+    justify-content: center;
+    align-items: center;
 }
 
 .absolute_logo{
-    display: absolute;
+    display: block;
+    position: absolute;
     cursor: pointer;
     margin-top: 2rem;
     margin-left: 2rem;
     height: 38px;
+    left: 32px;
+    top: 12px;
 }
 
 .container{
@@ -32,7 +37,6 @@ body{
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     margin: auto;
-    margin-left: 480px;
 }
 
 .container .forms{
@@ -174,10 +178,11 @@ body{
     position: absolute;
     border-radius: 12px;
     padding: 20px;
-    transform: translateY(-550%);
+    top: 32px;
 }
 
 .alert-danger{
+    color: white;
     background-color: #E97777;
 }
 

@@ -144,203 +144,23 @@ def search():
     else:
         return render_template('search.html')
 
-
-# # КОРЗИНА
-# @app.route('/basket', methods=['POST'])
-# def basket ():
-#     id_product = request.form['id'];
-#     title_product = request.form['title'];
-#     price = request.form['price'];
-#     image = request.form['img'];
-#     count = request.form['count'];
-
-#     print (json.dumps({'id': id_product,
-#     'title': title_product,
-#     'price': price,
-#     'image': image,
-#     'count': count}))
-
-#     cursor = mysql.connection.cursor()
-#     cursor.execute(f'''SELECT * FROM order_cart WHERE title = "{title_product}"
-#     AND ID_User = "{session.get('id')}"''')
-#     order_bac = cursor.fetchall()
-#     mysql.connection.commit()
-#     print("SESSION ORDER", order_bac)
-#     if order_bac:
-#         session['order'] = True
-#         # session['id_order'] = order_bac['ID_Order']
-#         session['id_prod'] = order_bac['ID_Medication']
-#         if request.form.get('product') == session.get('id_prod'):
-#             flash("Такой продукт уже есть", category='error')
-#             print("EST PRODUCT")
-#     cart_sql = f'''INSERT INTO `order_cart` (`Cost`, `title`, `ID_Medication`, `image`, `Count`, `ID_User`) VALUES ('{price}', '{title_product}', '{id_product}', '{image}', '{count}', '{session.get('id')}')'''
-#     return execute_query(connect_db, cart_sql)
-
-
-# # УДАЛЕНИЕ ТОВАРА ИЗ КОРЗИНЫ
-# @app.route('/del_item', methods=['POST'])
-# def del_item ():
-#     id_del = request.form['id_del']
-#     print (json.dumps({'id': id_del}))
-
-#     del_sql = f'''DELETE FROM `order_cart` WHERE `ID_Order` = "{id_del}"'''
-#     return execute_query(connect_db, del_sql)
-
-        
-
-# # УДАЛЕНИЕ ТОВАРА ИЗ ИЗБРАННОГО
-# @app.route('/del_favourite', methods=['POST'])
-# def del_favourite ():
-#     id_fav_del = request.form['id_fav_del']
-#     print (json.dumps({'id_fav': id_fav_del}))
-#     del_fav_sql = f'''DELETE FROM `favourite` WHERE `ID_favourite` = "{id_fav_del}"'''
-#     return execute_query(connect_db, del_fav_sql)
-
-
-# # ОПЛАТА
-# @app.route('/pay', methods=['GET', 'POST'])
-# def pay():
-#     name_id_user = session.get('id')
-
-#     basket_sql = f'''SELECT ID_Medication, Cost, title, image, Count, ID_Order
-#     from order_cart
-#     where ID_User = "{name_id_user}"
-#     group by ID_Order'''
-#     basket = execute_read_query(connect_db, basket_sql)
-
-#     order_pay = f'''SELECT ID_Order, sum(Cost*Count) as total_cost_count
-#     from order_cart
-#     where ID_User = "{name_id_user}"'''
-#     order = execute_read_query(connect_db, order_pay)
-
-#     get_user_sql = f'''SELECT name
-#     from user
-#     where id = "{name_id_user}"'''
-#     get_user = execute_read_query(connect_db, get_user_sql)
-
-#     adr_sql = f'''SELECT distinct Address
-#     from delivery
-#     where User_id = "{name_id_user}"'''
-#     adr = execute_read_query(connect_db, adr_sql)
-
-#     if request.form.get('clear_order'):
-        
-#         del_order = f'''DELETE FROM `order_cart` WHERE `ID_Order` IN ('{request.form.get('clear_order')}')'''
-#         execute_query(connect_db, del_order)
-#         return redirect('/')
-
-#     return render_template('pay.html', order=order, get_user=get_user, adr=adr, basket=basket)
-
-
-# # ОФОРМЛЕНИЕ ЗАКАЗА
-# @app.route('/order-form', methods=['GET', 'POST'])
-# def order_modal():
-#     order_pay = f'''SELECT ID_Order, sum(Cost*Count) as total_cost_count
-#     from order_cart
-#     where ID_User = "{session.get('id')}"'''
-
-#     cart_count_sql = f'''SELECT count(ID_Order) as count_cart
-#     from order_cart
-#     where ID_Medication > 0
-#     and ID_User = "{session.get('id')}"'''
-#     cart_count = execute_read_query(connect_db, cart_count_sql)
-
-#     order = execute_read_query(connect_db, order_pay)
-
-#     if request.method == "POST":
-#         address = request.form.get('address')
-#         id_order = request.form.get('id_order')
-#         order_type = request.form.get('order-type')
-#         paymant = request.form.get('payment-method')
-
-#         write_sql = f'''INSERT INTO `delivery` (`Delivery`, `Order_ID_Order`, `Pl_cost`, `User_id`, `Address`, `Methods_payment`) 
-#         VALUES ('{order_type}', '{id_order}', '149', '{session.get('id')}', '{address}', '{paymant}')'''
-#         execute_query(connect_db, write_sql)
-#         return redirect('/pay')
-
-#     return render_template ('modal.html', order = order, count = cart_count)
-
-
-# # СТРАНИЦА ИЗБРАННОЕ
-# @app.route('/favourite-list', methods=['GET', 'POST'])
-# def favourite():
-
-#     basket_sql = f'''SELECT ID_Medication, Cost, title, image, Count, ID_Order
-#     from order_cart
-#     where ID_User = "{session.get('id')}"
-#     group by ID_Order'''
-#     basket = execute_read_query(connect_db, basket_sql)
+@app.route('/profile', methods=['GET', 'POST'])
+def profile():
     
-#     cart_count_sql = f'''SELECT count(ID_Order) as count_cart
-#     from order_cart
-#     where ID_Medication > 0
-#     and ID_User = "{session.get('id')}"'''
-#     cart_count = execute_read_query(connect_db, cart_count_sql)
+    return render_template('profile.html')
 
-#     total_cost_count_sql = f'''SELECT sum(Cost*Count) as total_cost_count
-#     from order_cart
-#     where ID_User = "{session.get('id')}"'''
-#     total_cost_count = execute_read_query(connect_db, total_cost_count_sql)
+@app.route('/portfolio/<int:pharmacist_id>', methods=['GET', 'POST'])
+def portfolio(pharmacist_id):
+    user_id = session.get('id');
 
-#     fav_count_sql = f'''SELECT count(ID_favourite) as count_cart
-#     from favourite
-#     where ID_Medication > 0
-#     and ID_User = "{session.get('id')}"'''
-#     fav_count = execute_read_query(connect_db, fav_count_sql)
+    cart_sql = f'''SELECT pharmacist_id, full_name, stage, email, raiting, clinic_map, pharm_pic, image, descript, contact
+    FROM image, pharmacist
+    where pharmacist_id = "{pharmacist_id}"
+    and pharmacist.pharmacist_id = image.image_id
+    '''
+    card = execute_read_query(connect_db, cart_sql)
 
-#     cart_count_sql = f'''SELECT count(ID_Order) as count_cart
-#     from order_cart
-#     where ID_Medication > 0
-#     and ID_User = "{session.get('id')}"'''
-#     cart_count = execute_read_query(connect_db, cart_count_sql)
-
-#     item_fav_sql = f'''SELECT *
-#     from favourite
-#     where ID_User = "{session.get('id')}"'''
-#     item_fav = execute_read_query(connect_db, item_fav_sql)
-
-#     fav_count_sql = f'''SELECT count(ID_favourite) as count_cart
-#     from favourite
-#     where ID_Medication > 0
-#     and ID_User = "{session.get('id')}"'''
-#     fav_count = execute_read_query(connect_db, fav_count_sql)
-
-#     return render_template ('favour.html', count = fav_count, cart_count = cart_count, item = item_fav, fav = fav_count, basket = basket, total_cost_count = total_cost_count)
-
-
-# @app.route('/add_item', methods=['GET', 'POST'])
-# def add_item():
-#     if request.method == "POST":
-#         item_heart = request.form.get('heart')
-#         item_status = request.form.get('status')
-#         item_title = request.form.get('title')
-#         item_storage = request.form.get('storage')
-#         item_price = request.form.get('price')
-#         item_image = request.form.get('image')
-        
-#         print(item_heart, item_status, item_title, item_storage, item_price)
-#         write_sql = f'''INSERT INTO `favourite` (`title`, `Data_of_storage`, `Status`, `Cost`, `ID_Medication`, `ID_User`, `Image`)
-#         VALUES ('{item_title}', '{item_storage}', '{item_status}', '{item_price}', '{item_heart}', '{session.get('id')}', '{item_image}')'''
-#         execute_query(connect_db, write_sql)
-#         return redirect('/favourite-list')
-
-# # АПТЕЧКА
-# @app.route('/medkit', methods=['POST'])
-# def medkit():
-#     farm_cpec_sql = f'''SELECT *
-#     from pharmacist'''
-#     farm_spec = execute_read_query(connect_db, farm_cpec_sql)
-
-#     pecept_sql = f'''SELECT *
-#     from recipe'''
-#     pecept = execute_read_query(connect_db, pecept_sql)
-
-#     get_user_sql = f'''SELECT name
-#     from user
-#     where id = "{session.get('id')}"'''
-#     get_user = execute_read_query(connect_db, get_user_sql)
-
-#     return render_template('medkit.html', farm = farm_spec, pecept = pecept, get_user = get_user)
+    return render_template('portfolio.html', card=card)
 
 if __name__ == '__main__':
     app.run(debug=True)

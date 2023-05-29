@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% block head %}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
+<link rel="shortcut icon" href="../static/icon/next.svg" type="image/png">
+
+<title>{% block title %} PharmAdvice — личный профиль {% endblock %}</title>
+{% endblock %}
+</head>
+<body>
+    <div className="hidden lg:block lg:pl-[421px] h-full border-l-[1px] border-gray-lightest border-opacity-30">
+        <div 
+        className="px-4 py-10 sm:px-6 lg:px-8 lg:py-6 h-full flex justify-center items-center bg-[#f3f4f6]">
+        <div className="text-center items-center flex flex-col">
+          <h3 className="mt-2 text-2xl font-semibold text-[##111827] font-['Lato']">
+            Выберите чат с выбранным специалистом
+          </h3>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

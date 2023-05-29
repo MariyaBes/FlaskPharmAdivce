@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}Портфолио{% endblock %}
+
+{% block body %}
+
+    {% for pharmacist in card %}
+    
+    <div class='flex flex-col max-w-[1920px] mx-auto xl:px-[365px] md:px-10 sm:px-2 px-4 min-h-full'>
+      
+        <div class="f2a3u4s__20230525161148">
+            <div class="doctor-detail-doctor-wrapper">
+                <div class="doctor-detail-photo-wrapper">
+                    <img src="{{pharmacist.image}}" class="photo">
+                </div>
+
+                <div class="d1n8gbi9__20230525161148">
+                    <p class="Title__xaxpyys">{{pharmacist.full_name}}</p>
+
+                    <p class="Text__t1oqnxex">
+                        Стаж: {{pharmacist.stage}}
+                    </p>
+
+                    <p class="Text__t1oqnxex">
+                        Телефон: {{pharmacist.contact}}
+                    </p>
+
+                    <p class="Text__t1oqnxex">
+                        {{pharmacist.clinic_map}}
+                    </p>
+
+                    <div class="r70vin7__20230525161148 f2a3u4s__20230525161149">
+                        <div class="f2a3u4s__20230525161149">
+                            <img src="/static/public/Vector.svg" alt="" class="change_color">
+                            <p class="Text__t1oqnxex">731</p>
+                        </div>
+                        <p class="Text__t1oqnxex">
+                            41 отзывов
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buton">
+                <div class="row_but">
+                    <button class="first">Отправить сообщение</button>
+                    <button class="second">Оставить отзыв</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="catalog-doctor-description-wrapper">
+            <h3 class="Title__x1m3wrv4">Информация о фармацевте</h3>
+
+            <div class="catalog-doctor-description">
+                <p class="">
+                    - Помощь клиенту с выбором препаратов или средств из аптечного ассортимента;
+                    - Оказание грамотной профессиональной консультацию;
+                    - Обслуживание клиентов, предоставление информации клиентам об акциях и новинках
+                </p>
+            </div>
+        </div>
+
+        <div class="cet4zd__20230525161148">
+            <h3 class="Title__x1m3wrv4">Проверенные отзывы о фармацевте</h3>
+
+            <div class="cwcn7g6__20230525161148">
+                <div class="f2a3u4s__2023052516114">
+                    <p class="otziv">5\5</p>
+
+                    <div class="c1p0p554__20230525161148">
+                        <p class="Text__t1oqnxex">
+                            Отлично!!! Спасибо! Теперь только к Вам.
+                        </p>
+                    </div>
+
+                    <p class="Text__t1oqnxex_onet">
+                        Станислав, 23 марта
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="cwcn7g6__20230525161148">
+                <div class="f2a3u4s__2023052516114">
+                    <p class="otziv">5\5</p>
+
+                    <div class="c1p0p554__20230525161148">
+                        <p class="Text__t1oqnxex">
+                            Отлично!!! Спасибо! Теперь только к Вам.
+                        </p>
+                    </div>
+
+                    <p class="Text__t1oqnxex_onet">
+                        Станислав, 23 марта
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="cwcn7g6__20230525161148">
+                <div class="f2a3u4s__2023052516114">
+                    <p class="otziv">5\5</p>
+
+                    <div class="c1p0p554__20230525161148">
+                        <p class="Text__t1oqnxex">
+                            Хороший спец
+                        </p>
+                    </div>
+
+                    <p class="Text__t1oqnxex_onet">
+                        Сергей, 23 марта
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="cwcn7g6__20230525161148">
+                <div class="f2a3u4s__2023052516114">
+                    <p class="otziv">5\5</p>
+
+                    <div class="c1p0p554__20230525161148">
+                        <p class="Text__t1oqnxex">
+                            Доктор назначила мне пройти дополнительные обследования и проконсультировала по тем таблеткам, которые я пью. Всё прошло по делу. Видно, что врач опытный, компетентный, вежливый и пунктуальный. Были проблемы со связью, мы общались в формате аудио.
+                        </p>
+                    </div>
+
+                    <p class="Text__t1oqnxex_onet">
+                        Алина, 14 марта
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="cwcn7g6__20230525161148">
+                <div class="f2a3u4s__2023052516114">
+                    <p class="otziv">5\5</p>
+
+                    <div class="c1p0p554__20230525161148">
+                        <p class="Text__t1oqnxex">
+                            Профессиональный доброжелательный подход.
+                        </p>
+                    </div>
+
+                    <p class="Text__t1oqnxex_onet">
+                        Александр, 16 января
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+        
+    {% endfor %}
+ 
+{% endblock %}

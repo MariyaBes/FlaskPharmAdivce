@@ -28,28 +28,33 @@
 }
 
 .search_input{
-    width: 736px;
-    height: 62px;
-    border-radius: 34px;
+    width: 541px;
+    height: 60px;
+    border-top-left-radius: 34px;
+    border-bottom-left-radius: 34px;
     border: 2px solid rgba(134, 64, 249, 0.48);
     margin-right: auto;
     margin-left: auto;
     padding-left: 25px;
 }
 
+.form {
+    display: flex;
+    flex-direction: row;
+}
+
 .search_but {
     display: flex;
-    position: absolute;
     width: 195px;
     height: 60px;
-    border-radius: 34px;
+    border-top-right-radius: 34px;
+    border-bottom-right-radius: 34px;
     background-color: rgba(134, 64, 249, 1);
     color: white;
     justify-content: center;
     padding: 5px;
     font-weight: bold;
     font-size: 32px;
-    margin-left: 540px;
 }
 
 .search_but:hover {
@@ -154,6 +159,10 @@
     font-weight: bold;
     letter-spacing: 10%;
     margin: auto;
+}
+
+.butt_chat:hover {
+    background-color: rgba(237, 125, 125, 1);
 }
 
 .more {
