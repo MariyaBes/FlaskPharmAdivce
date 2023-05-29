@@ -6,7 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="../static/icon/next.svg" type="image/png">
     <link rel="stylesheet" href="/static/css/pharm.css">
+    <link rel="stylesheet" href="/static/css/profile.css">
     <link rel="stylesheet" href="/static/css/portfolio.css">
+    <link rel="stylesheet" href="/static/css/edit.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+    />
     <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,8 +52,8 @@
                   height="15"
                   width="1"
                   src="/static/public/palka.svg">
-                  <a href="/profile">
-                    <p class="text_1">Профиль</p>
+                  <a href="/">
+                    <p class="text_1">О нас</p>
                   </a>
                   
             </div>
@@ -65,7 +71,7 @@
                     <img alt="User" class="User" height="30" width="30" src="/static/public/usersquare.svg">
                   </a>
                   {% else %}
-                  <a href="{{ url_for('logout') }}">
+                  <a href="/profile/{{session.id}}">
                     <img alt="User" class="User" height="30" width="30" src="/static/public/placeholder.jpg">
                   </a>
                   {% endif %}

@@ -40,8 +40,8 @@
                   height="15"
                   width="1"
                   src="/static/public/palka.svg">
-                  <a href="/profile">
-                    <p class="text_1">Профиль</p>
+                  <a href="/">
+                    <p class="text_1">О нас</p>
                   </a>
                   
             </div>
@@ -59,7 +59,7 @@
                     <img alt="User" class="User" height="30" width="30" src="/static/public/usersquare.svg">
                   </a>
                   {% else %}
-                  <a href="{{ url_for('logout') }}">
+                  <a href="/profile/{{session.id}}">
                     <img alt="User" class="User" height="30" width="30" src="/static/public/placeholder.jpg">
                   </a>
                   {% endif %}

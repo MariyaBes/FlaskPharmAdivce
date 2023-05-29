@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Редактировать профиль{% endblock %}
+
+{% block body %}
+
+<div class='flex flex-col max-w-[1920px] mx-auto xl:px-[365px] md:px-10 sm:px-2 px-4 min-h-full'>
+    <div class="c1523opt__20230529091657">
+        <div class="ss8okg6__20230529091657">
+
+            <div class="p1cj7z2q__20230529091657">
+                <h4 class="Title__xaxpyys">Личные данные</h4>
+            </div>
+
+            <form action="/submit" class="f1dcnlgn__20230529091657" method="post" enctype="multipart/form-data">
+
+                <div class="fuu0unk__20230529091657">
+                    <div class="w1qik2xg__20230529091657">
+
+                        <div class="c1wfzg2o__20230529091657">
+                            <input type="text" id="name" name="name" class="i19j9dwr__20230529091657" placeholder="Введите ваше ФИО">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="fuu0unk__20230529091657">
+                    <div class="w1qik2xg__20230529091657">
+
+                        <div class="c1wfzg2o__20230529091657">
+                            <input type="tel" id="phone" name="phone" class="i19j9dwr__20230529091657" placeholder="Телефон">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="fuu0unk__20230529091657">
+                    <div class="w1qik2xg__20230529091657">
+
+                        <div class="c1wfzg2o__20230529091657">
+                            <input type="date" id="birth" name="birth" class="i19j9dwr__20230529091657" placeholder="Дата рождения">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="fuu0unk__20230529091657">
+                    <div class="w1qik2xg__20230529091657">
+
+                        <div class="c1wfzg2o__20230529091657">
+                            <input type="text" id="address" name="address" class="i19j9dwr__20230529091657" placeholder="Адрес">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="fuu0unk__20230529091657">
+                    <div class="w1qik2xg__20230529091657">
+
+                        <div class="c1wfzg2o__20230529091657">
+                            <input type="file" id="image" name="image">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="s322r2x__20230529091657">
+                    <button class="Button__b1oqnxex" type="submit">Сохранить изменения</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+    
+{% endblock %}

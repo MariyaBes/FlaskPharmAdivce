@@ -1,25 +1,195 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-{% block head %}
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
-<link rel="shortcut icon" href="../static/icon/next.svg" type="image/png">
+{% extends "base.html" %}
 
-<title>{% block title %} PharmAdvice — личный профиль {% endblock %}</title>
-{% endblock %}
-</head>
-<body>
-    <div className="hidden lg:block lg:pl-[421px] h-full border-l-[1px] border-gray-lightest border-opacity-30">
-        <div 
-        className="px-4 py-10 sm:px-6 lg:px-8 lg:py-6 h-full flex justify-center items-center bg-[#f3f4f6]">
-        <div className="text-center items-center flex flex-col">
-          <h3 className="mt-2 text-2xl font-semibold text-[##111827] font-['Lato']">
-            Выберите чат с выбранным специалистом
+{% block title %}Личный кабинет{% endblock %}
+
+{% block body %}
+
+  <div class="wrapper">
+
+    <div class="sidebar">
+
+      {% for user in user %}
+      <div class="profile">
+        <img src="{{user.image}}" alt="profile_picture" class="avatar">
+        <h3>{{user.name}}</h3>
+        <p>{{user.email}}</p>
+
+        <form action="/edit/{{user.id}}" method="post">
+          <button class="button" type="submit">
+            <!-- <svg viewBox="0 0 16 16" class="bi bi-arrow-repeat" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg"> -->
+            <img src="/static/public/edit.svg" class="edit">
+          Редактировать 
+          </button>
+        </form>
+      </div>
+      {% endfor %}
+
+
+      
+      <div class="chats">
+
+        <div class="row_title">
+
+          <h3 class="chat_title">
+            Чаты с фармацевтами
           </h3>
+              <div class="count_chats">
+                <span class="int">{{session.pharm_count}}</span>
+              </div>
+        </div>
+
+
+        {% for pharmacist in list %}
+        <div class="rows_users" >
+          <a href="/portfolio/{{pharmacist.pharmacist_id}}" class="nim-dialog nim-dialog_muted">
+
+            <div class="nim-dialog--photo">
+
+              <div class="nim-peer">
+
+                <div class="nim-peer--photo-w">
+
+                  <img src="{{pharmacist.image}}" alt="" height="65" width="65">
+                </div>
+              </div>
+              
+            </div>
+
+            <div class="nim-dialog--content">
+              <div class="nim-dialog--cw">
+
+                <div class="nim-dialog--date_wrapper">
+                  <div class="nim-dialog--date">14:06</div>
+                </div>
+
+                <div class="_im_dialog_title" title>
+                  <div class="nim-dialog--name">
+                    <span class="nim-dialog--name-w">
+                      <span class="_im_dialog_link">{{pharmacist.full_name}}</span>
+                    </span>
+                  </div>
+                  <div class="nim-dialog--text-preview">
+                    <span class="nim-dialog--preview">
+                      Просмотрено
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </a>
+        </div>
+        {% endfor %}
+        
+      </div>
+      
+
+
+    </div>
+
+    <div class="container_chat">
+      <!-- msg-header section starts -->
+      <div class="msg-header">
+        <div class="container1">
+          <img src="/static/public/Rectangle 2594.png" class="msgimg" />
+          <div class="active">
+            <p class="user_name">Мороз Юрий Викторович</p>
+          </div>
+        </div>
+      </div>
+      <!-- msg-header section ends -->
+  
+      <!-- Chat inbox  -->
+      <div class="chat-page">
+        <div class="msg-inbox">
+          <div class="chats_one">
+            <!-- Message container -->
+            <div class="msg-page">
+              <!-- Incoming messages -->
+  
+              <div class="received-chats">
+                <div class="received-chats-img">
+                  <img src="/static/public/Rectangle 2594.png" class="user2"/>
+                </div>
+                <div class="received-msg">
+                  <div class="received-msg-inbox">
+                    <p>
+                      Жалобы лучше разделять на три основные категории: 
+                      - облигатные, 
+                      - факультативные, 
+                      - невротические.
+                    </p>
+                    <span class="time">18:06 | 23 марта</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Outgoing messages -->
+              <div class="outgoing-chats">
+                
+                <div class="outgoing-msg">
+                  <div class="outgoing-chats-msg">
+                    <p class="multi-msg">
+                      Боль началась вчера вечером
+                    </p>
+                    <p class="multi-msg">
+                      Боль колющая
+                    </p>
+  
+                    <span class="time">18:33 | 23 марта</span>
+                  </div>
+                </div>
+              </div>
+              <div class="received-chats">
+                <div class="received-chats-img">
+                  <img src="/static/public/Rectangle 2594.png" class="user2" />
+                </div>
+                <div class="received-msg">
+                  <div class="received-msg-inbox">
+                    <p class="single-msg">
+                      Рекомендую сдать в ближайшее время анализы, чтобы узнать в чем причина
+                    </p>
+                    <span class="time">18:35 | 23 марта</span>
+                  </div>
+                </div>
+              </div>
+              <div class="outgoing-chats">
+                
+                <div class="outgoing-msg">
+                  <div class="outgoing-chats-msg">
+                    <p>
+                      Хорошо, когда назначим встечу в следующий раз
+                    </p>
+  
+                    <span class="time">18:37 | 23 марта</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <!-- msg-bottom section -->
+  
+          <div class="msg-bottom">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Написать сообщение..."
+              />
+  
+              <span class="input-group-text send-icon">
+                <i class="bi bi-send"></i>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-</body>
-</html>
+
+  </div>
+
+
+
+
+{% endblock %}

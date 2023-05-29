@@ -1,6 +1,8 @@
+import os
 import flask
 from flask import Flask, render_template, request, redirect, url_for, session, flash, json
 from flask_mysqldb import MySQL, MySQLdb
+from werkzeug.utils import secure_filename
 from flask_login import LoginManager
 import re
 import datetime
@@ -20,6 +22,13 @@ app.permanent_session_lifetime = datetime.timedelta(seconds=900)
 # COOKIE_TIME_OUT = 60*5
 
 login_manager = LoginManager()
+# configure file upload
+app.config['UPLOAD_FOLDER'] = 'path/to/uploads/folder'
+app.config['ALLOWED_EXTENSIONS'] = set(['png', 'jpg', 'jpeg', 'gif'])
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
 mysql = MySQL(app)
 
@@ -83,6 +92,7 @@ def sign_up():
         email = request.form['email']
         password = request.form['password']
         password2 = request.form.get('password2')
+        checkbox = request.form.get('checkbox')
         password_hash = sha256_crypt.encrypt(request.form['password'])
 
         check_sql = f'''select * from user where email = "{email}"'''
@@ -98,6 +108,8 @@ def sign_up():
             flash('Email неверный.', category='error')
         elif len(password) < 7:
             flash('Пароль должен быть не более 8 символов.', category='error')
+        elif checkbox is None:
+            flash('Условия обязательны', category='error')
         elif name[0].islower():
             flash('Имя и фамилия должны начинаться с заглавных букв.')
         else:
@@ -144,10 +156,46 @@ def search():
     else:
         return render_template('search.html')
 
-@app.route('/profile', methods=['GET', 'POST'])
-def profile():
-    
-    return render_template('profile.html')
+@app.route('/profile/<int:id>', methods=['GET', 'POST'])
+def profile(id):
+    user_id = session.get('id');
+
+    user_sql = f'''SELECT id, name, email, image
+    from user
+    where user.id = {user_id}'''
+    user = execute_read_query(connect_db, user_sql)
+
+    request_sql = f'''SELECT pharmacist_id, full_name, stage, email, raiting, clinic_map, pharm_pic, image
+    from image, pharmacist
+    where pharmacist.pharmacist_id = image.image_id
+    and pharmacist_id = image_image_id'''
+    list = execute_read_query(connect_db, request_sql)
+    session['pharm_count'] = len(list)
+
+    return render_template('profile.html', user=user, list=list)
+
+@app.route('/edit/<int:id>', methods=['GET', 'POST'])
+def edit(id):
+    user_id = session.get('id');
+
+    user_sql = f'''SELECT id, name, email, image, address, phone, birth
+    from user
+    where user.id = {user_id}'''
+    user = execute_read_query(connect_db, user_sql)
+
+    return render_template('edit.html', user=user)
+
+@app.route('/submit', methods=['POST'])
+def submit():
+    name = request.form.get('name')
+    phone = request.form.get('phone')
+    birth = request.form.get('date')
+    address = request.form.get('text')
+
+    insert_edit = f'''INSERT INTO `user` (`name`, `phone`, `birth`, `address`) VALUES ('{name}', '{phone}', '{birth}', '{address}')'''
+    execute_query(connect_db, insert_edit)
+
+    return redirect(url_for('home'))
 
 @app.route('/portfolio/<int:pharmacist_id>', methods=['GET', 'POST'])
 def portfolio(pharmacist_id):
