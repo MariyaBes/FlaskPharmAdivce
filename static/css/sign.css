@@ -8,23 +8,31 @@
     font-family: 'Mulish', sans-serif; 
 }
 
+
 body{
     height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: white;
+}
+
+.absolute_logo{
+    display: absolute;
+    cursor: pointer;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    height: 38px;
 }
 
 .container{
     position: relative;
-    max-width: 430px;
+    max-width: 520px;
     width: 100%;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    margin: 0 20px;
+    margin: auto;
+    margin-left: 480px;
 }
 
 .container .forms{
@@ -38,7 +46,7 @@ body{
 
 .container .form{
     width: 50%;
-    padding: 30px;
+    padding: 80px;
     background-color: #fff;
     transition: margin-left 0.18s ease;
 }
@@ -57,7 +65,7 @@ body{
     bottom: 0;
     height: 3px;
     width: 30px;
-    background-color: #4070f4;
+    background-color: #ED6C6C;
     border-radius: 25px;
 }
 
@@ -82,7 +90,7 @@ body{
 }
 
 .input-field input:is(:focus, :valid){
-    border-bottom-color: #4070f4;
+    border-bottom-color: #ED6C6C;
 }
 
 .input-field i{
@@ -95,7 +103,7 @@ body{
 }
 
 .input-field input:is(:focus, :valid) ~ i{
-    color: #4070f4;
+    color: #ED6C6C;
 }
 
 .input-field i.icon{
@@ -121,7 +129,7 @@ body{
 
 .checkbox-content input{
     margin: 0 8px -2px 4px;
-    accent-color: #4070f4;
+    accent-color: #ED6C6C;
 }
 
 .form .text{
@@ -130,7 +138,7 @@ body{
 }
 
 .form a.text{
-    color: #4070f4;
+    color: #ED6C6C;
     text-decoration: none;
 }
 .form a:hover{
@@ -148,13 +156,13 @@ body{
     font-weight: 500;
     letter-spacing: 1px;
     border-radius: 6px;
-    background-color: #4070f4;
+    background-color: #ED6C6C;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .button:hover{
-    background-color: #265df2;
+    background-color: #F19090;
 }
 
 .form .login-signup{

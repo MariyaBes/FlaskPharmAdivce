@@ -2,7 +2,8 @@
 module.exports = {
     content: [
       "./templates/**/*.html",
-      "./static/src/**/*.js"
+      "./static/src/**/*.js",
+      "./node_modules/flowbite/**/*.js"
     ],
     theme: {
         extend: {},
@@ -36,5 +37,7 @@ module.exports = {
             body: ['Lato', 'sans-serif'],
           },
       },
-    plugins: [],
+    plugins: [
+      require("flowbite/plugin")
+    ],
   }

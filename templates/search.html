@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
+    <link rel="stylesheet" href="/static/css/pharm.css">
+    <link rel="shortcut icon" href="../static/icon/next.svg" type="image/png">
+  
+    <title>{% block title %} PharmAdvice — поиск {% endblock %}</title>
+</head>
+<body>
+    
+    <div class="navbar">
+        <div class="border">
+            <p class="pharmacy">Для фармацевтов</p>
+              <select name="currency" class="gps">
+                <option value="Республика Крым">Республика Крым</option>
+                <option value="Москва и область">Москва и область</option>
+                <option value="Краснодар">Краснодар</option>
+              </select>
+        </div>
+  
+        <div class="down">
+          <div class="width_con">
+            <div class="items">
+              <a href="/">
+                <img alt="Logo" class="hidden md:block cursor-pointer mr-[422px]" height="100" width="240" src="/static/public/LOGO.png">
+              </a>
+              
+              <div class="menu_center">
+                <a class="text_1">Мои рецепты</a>
+                <img alt="Palka" class="beetwen" height="15" width="1" src="/static/public/palka.svg">
+                <a class="text_1" href="/pharmacist">Фармацевты</a>
+                <img
+                    alt="Palka"
+                    class="beetwen"
+                    height="15"
+                    width="1"
+                    src="/static/public/palka.svg">
+                    <a href="/profile">
+                      <p class="text_1">Профиль</p>
+                    </a>
+                    
+              </div>
+              <img alt="Notification" class="Notification" height="30" width="30" src="/static/public/notification.svg">
+              <div class="block_User">
+                  <div class="image">
+                    {% if not session.logged_in %}
+                    <a href="/sign-up">
+                      <img alt="User" class="User" height="30" width="30" src="/static/public/usersquare.svg">
+                    </a>
+                    {% else %}
+                    <a href="{{ url_for('logout') }}">
+                      <img alt="User" class="User" height="30" width="30" src="/static/public/placeholder.jpg">
+                    </a>
+                    {% endif %}
+                    
+                  </div>
+              </div>
+              
+                        
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+
+    <div class="con_sc">
+        <div>
+            {%if session.search_pro_count>0%}
+                <span>По запросу <strong>{{value}}</strong>
+                    {%if session.search_pro_count>1%}
+                    найдено {{session.search_pro_count}} специалиста
+                    {%else%}
+                    найден {{session.search_pro_count}} специалист
+                    
+                    {%endif%}
+                </span>
+            {%else%}
+                <span>По вашему запросу специалистов сейчас нет</span>
+            {%endif%}
+        </div>
+
+    </div>
+    <div class='flex flex-col max-w-[1920px] mx-auto xl:px-[365px] md:px-10 sm:px-2 px-4 min-h-full'>
+    {% for pharmacist in results %}
+        <div class="container">
+        <img src="{{ pharmacist.image }}" alt="lp" class="Image_Pharm">
+
+        
+        <div class="description">
+            <p class="name">{{ pharmacist.full_name }}</p>
+            <p class="email">Email: {{ pharmacist.email }}</p>
+            <p class="stage">Стаж: {{ pharmacist.stage }}</p>
+            <p class="address">Адрес: {{ pharmacist.clinic_map }}</p>
+
+            <div class="desc_row">
+            <img src="/static/public/Vector.svg" alt="like" class="like">
+            <p class="int">{{ pharmacist.raiting }}</p>
+
+            <img src="/static/public/messagetext1.svg" alt="like" class="com">
+            <p class="int1">351 Отзывов</p>
+
+            <button class="butt_chat">Начать чат</button>
+            
+            <p class="more">Узнать больше</p> 
+            <img src="/static/public/arrow-right-circle.svg" alt="fk">
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+
+    <footer>
+        <div class="footer">
+          <div class="foot_bor">
+              <img
+                  alt='logo'
+                  class='logo' 
+                  height='38'
+                  width='240'
+                  src='/static/public/LOGO.png'>
+          </div>
+  
+          <div class="foot_down">
+              <span class="decs">О НАС</span>
+              <span class="decs">МОИ РЕЦЕПТЫ</span>
+              <span class="decs">КОНТАКТЫ</span>
+              <span class="decs">FAQ</span>
+          </div>
+  
+          <div class="podval">
+              <p class="mb-[11px]">ГБОУВО РК КИПУ имени Февзи Якубова</p>
+  
+              <p class="mb-[28px]">ИНИЦИАТИВНАЯ РАЗРАБОТКА В РАМКАХ ИНТЕНСИВА «ОТ ИДЕИ К ПРОТОТИПУ - ВЕСНА 2023»</p>
+          </div>
+  
+        </div>
+      </footer>
+</body>
+</html>

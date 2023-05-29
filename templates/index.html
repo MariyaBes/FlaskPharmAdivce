@@ -25,25 +25,37 @@
       <div class="down">
         <div class="width_con">
           <div class="items">
-            <img alt="Logo" class="hidden md:block cursor-pointer mr-[422px]" height="100" width="240" src="/static/public/LOGO.png">
+            <a href="/">
+              <img alt="Logo" class="hidden md:block cursor-pointer mr-[422px]" height="100" width="240" src="/static/public/LOGO.png">
+            </a>
             
             <div class="menu_center">
               <a class="text_1">Мои рецепты</a>
               <img alt="Palka" class="beetwen" height="15" width="1" src="/static/public/palka.svg">
-              <a class="text_1">Фармацевты</a>
+              <a class="text_1" href="/pharmacist">Фармацевты</a>
               <img
                   alt="Palka"
                   class="beetwen"
                   height="15"
                   width="1"
                   src="/static/public/palka.svg">
-                  <p class="text_1">О нас</p>
-  
+                  <a href="/profile">
+                    <p class="text_1">Профиль</p>
+                  </a>
+                  
             </div>
             <img alt="Notification" class="Notification" height="30" width="30" src="/static/public/notification.svg">
             <div class="block_User">
                 <div class="image">
-                  <img alt="User" class="User" height="30" width="30" src="/static/public/placeholder.jpg">
+                  {% if not session.logged_in %}
+                  <a href="/sign-up">
+                    <img alt="User" class="User" height="30" width="30" src="/static/public/usersquare.svg">
+                  </a>
+                  {% else %}
+                  <a href="{{ url_for('logout') }}">
+                    <img alt="User" class="User" height="30" width="30" src="/static/public/placeholder.jpg">
+                  </a>
+                  {% endif %}
                   
                 </div>
             </div>
@@ -61,9 +73,11 @@
       <!-- {/* ОПИСАНИЕ И СЛОГАН */} -->
 
       <div class="flex flex-row items-center justify-between gap-3 md:gap-0 mt-[88px]">
+
         <img src="/static/public/DrawKit.png" alt="five" height="650" width="650">
 
         <div class='grid ml-[19px]'>
+
           <p class='text-[64px] font-bold tracking-wider font-["Prompt"]'>PHARMADVICE</p>
           
           <h1 class='font-semibold text-[22px] antialiased tracking-[0.11rem] font-["Lato"]'>Упрощаем взаимодействие с аптекой</h1>

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/login-style.css">
-    <link rel="shortcut icon" href="../static/icon/hygieia.png" type="image/png">
+    <link rel="shortcut icon" href="/static/icon/vercel.svg" type="image/svg">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,6 +17,9 @@
     <title>{% block title %}Авторизация{% endblock %}</title>
 </head>
 <body>
+    <a href="/" class="absolute_logo">
+        <img src="/static/public/LOGO.png" alt="logo" width="240" height="38">
+    </a>
 
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
         messages %} {% for category, message in messages %} {% if category ==
@@ -33,7 +36,7 @@
     <div class="container">
         <div class="forms">
             <div class="form login">
-                <span class="title">Авторизация</span>
+                <span class="title">Авторизация в PHARMADVICE</span>
                 <form  id="form"  method="POST">
                     <div class="input-field">
                         <input type="email" id="email" name="email" placeholder="Введите email" required>
@@ -64,6 +67,8 @@
 
         </div>
     </div>
+
+    
 
     <script
     src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

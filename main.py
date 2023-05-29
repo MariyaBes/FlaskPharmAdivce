@@ -114,85 +114,35 @@ def sign_up():
 def home():
     user_id = session.get('id');
 
-    # request_sql = f'''SELECT ID_Medication, Name, Date_of_storage, Price, Status, Billet, Del_Price, image_1, image_2
-    # from image, medication
-    # where medication.ID_Medication = image.id_image
-    # and ID_Medication = Image_id_image'''
-    # card_drug = execute_read_query(connect_db, request_sql)
-
-    # basket_sql = f'''SELECT ID_Medication, Cost, title, image, Count, ID_Order
-    # from order_cart
-    # where ID_User = "{user_id}"
-    # group by ID_Order'''
-    # basket = execute_read_query(connect_db, basket_sql)
-    
-    # cart_count_sql = f'''SELECT count(ID_Order) as count_cart
-    # from order_cart
-    # where ID_Medication > 0
-    # and ID_User = "{user_id}"'''
-    # cart_count = execute_read_query(connect_db, cart_count_sql)
-
-    # total_cost_count_sql = f'''SELECT sum(Cost*Count) as total_cost_count
-    # from order_cart
-    # where ID_User = "{user_id}"'''
-    # total_cost_count = execute_read_query(connect_db, total_cost_count_sql)
-
-    # fav_count_sql = f'''SELECT count(ID_favourite) as count_cart
-    # from favourite
-    # where ID_Medication > 0
-    # and ID_User = "{session.get('id')}"'''
-    # fav_count = execute_read_query(connect_db, fav_count_sql)
-
-
     return render_template('index.html')
 # log_in = session.get('logged_in'), card_drug = card_drug, basket = basket, cart_count = cart_count, total_cost_count = total_cost_count, fav = fav_count
 
 # СТРАНИЦА ТОВАРА
-# @app.route('/cart/<int:ID_Medication>', methods=['GET', 'POST'])
-# def cart(ID_Medication):
-#     user_id = session.get('id');
+@app.route('/pharmacist', methods=['GET', 'POST'])
+def list():
+    request_sql = f'''SELECT pharmacist_id, full_name, stage, email, raiting, clinic_map, pharm_pic, image
+    from image, pharmacist
+    where pharmacist.pharmacist_id = image.image_id
+    and pharmacist_id = image_image_id'''
+    list = execute_read_query(connect_db, request_sql)
 
-#     cart_sql = f'''SELECT ID_Medication, Name, Description, Price, Billet, image_1, image_2, image_3, Title, Address, Country, Category, Apllication, Release_Conditions, Contraindications, Side_Effects, Dose
-#     from medication, image, provider, marking
-#     where ID_Medication = "{ID_Medication}"
-#     and medication.ID_Medication = image.id_image
-#     and ID_Medication = Image_id_image
-#     and ID_Medication = marking.ID_Marking
-#     and medication.ID_Medication = provider.ID_Provider
-#     '''
-#     card_product = execute_read_query(connect_db, cart_sql)
-
-#     basket_sql = f'''SELECT ID_Medication, Cost, title, image, Count, ID_Order
-#     from order_cart
-#     where ID_User = "{user_id}"
-#     group by ID_Order'''
-#     basket = execute_read_query(connect_db, basket_sql)
-
-#     basket_sql = f'''SELECT ID_Medication, Cost, title, image, Count, ID_Order
-#     from order_cart
-#     where ID_User = "{user_id}"
-#     group by ID_Order'''
-#     basket = execute_read_query(connect_db, basket_sql)
     
-#     cart_count_sql = f'''SELECT count(ID_Order) as count_cart
-#     from order_cart
-#     where ID_Medication > 0
-#     and ID_User = "{user_id}"'''
-#     cart_count = execute_read_query(connect_db, cart_count_sql)
+    return render_template('pharm.html', list=list)
 
-#     total_cost_count_sql = f'''SELECT sum(Cost*Count) as total_cost_count
-#     from order_cart
-#     where ID_User = "{user_id}"'''
-#     total_cost_count = execute_read_query(connect_db, total_cost_count_sql)
 
-#     fav_count_sql = f'''SELECT count(ID_favourite) as count_cart
-#     from favourite
-#     where ID_Medication > 0
-#     and ID_User = "{session.get('id')}"'''
-#     fav_count = execute_read_query(connect_db, fav_count_sql)
-   
-
-#     return render_template('card.html', card_product = card_product, basket = basket, cart_count = cart_count, total_cost_count = total_cost_count, fav = fav_count)
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    if request.method == 'POST':
+        value = request.form.get('search_query')
+        check_sql = f'''SELECT pharmacist_id, full_name, stage, email, raiting, clinic_map, pharm_pic, image 
+                        FROM image, pharmacist
+                        WHERE pharmacist.pharmacist_id = image.image_id
+                        and pharmacist.full_name LIKE '%{value}%' group by pharmacist_id'''
+        results = execute_read_query(connect_db, check_sql)
+        session['search_pro_count'] = len(results)
+        return render_template('search.html', value=value, results=results)
+    else:
+        return render_template('search.html')
 
 
 # # КОРЗИНА
